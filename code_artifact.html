@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="ru" class="h-full bg-slate-950 text-slate-100 scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>ГлобалГранд — Схема Партнёрской CPA-Сети</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                        },
+                        partner: '#10b981', // green
+                        manager: '#8b5cf6', // purple
+                        platform: '#f59e0b', // amber
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        body { 
+            font-family: 'Inter', sans-serif; 
+            -webkit-tap-highlight-color: transparent;
+        }
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        /* Custom scrollbar for mobile nav */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        input[type=range] {
+            touch-action: manipulation;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between bg-slate-950 text-slate-100 antialiased selection:bg-indigo-500 selection:text-white pb-10">
+
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-50 glass-panel border-b border-slate-800/80 bg-slate-950/90 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2.5 sm:gap-3">
+                <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-500 flex items-center justify-center shadow-lg shadow-indigo-500/30 shrink-0">
+                    <i data-lucide="network" class="w-5 h-5 sm:w-6 sm:h-6 text-white"></i>
+                </div>
+                <div>
+                    <h1 class="text-base sm:text-lg font-bold tracking-tight text-white flex items-center gap-1.5 sm:gap-2 leading-tight">
+                        ГлобалГранд 
+                        <span class="text-[10px] sm:text-xs px-1.5 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 font-medium border border-indigo-500/30">CPA</span>
+                    </h1>
+                    <p class="text-[10px] sm:text-xs text-slate-400 line-clamp-1">Модель комиссии и ветвления сети</p>
+                </div>
+            </div>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden lg:flex items-center gap-1 bg-slate-900/80 p-1 rounded-xl border border-slate-800">
+                <button onclick="scrollToSection('flow-section')" class="px-3 py-1.5 text-xs font-medium text-slate-300 hover:text-white rounded-lg hover:bg-slate-800 transition">Распределение 10%</button>
+                <button onclick="scrollToSection('branches-section')" class="px-3 py-1.5 text-xs font-medium text-slate-300 hover:text-white rounded-lg hover:bg-slate-800 transition">Логика 2-х Уровней</button>
+                <button onclick="scrollToSection('calculator-section')" class="px-3 py-1.5 text-xs font-medium text-slate-300 hover:text-white rounded-lg hover:bg-slate-800 transition">Калькулятор Партнёра</button>
+                <button onclick="scrollToSection('platform-economics')" class="px-3 py-1.5 text-xs font-medium text-amber-400 hover:text-amber-300 rounded-lg hover:bg-slate-800 transition">Экономика Сервиса</button>
+                <button onclick="scrollToSection('rules-section')" class="px-3 py-1.5 text-xs font-medium text-slate-300 hover:text-white rounded-lg hover:bg-slate-800 transition">Правила</button>
+            </nav>
+        </div>
+
+        <!-- Mobile Horizontal Scroll Navigation Bar -->
+        <div class="lg:hidden border-t border-slate-800/60 bg-slate-900/60 px-3 py-2 overflow-x-auto no-scrollbar flex items-center gap-2 text-xs">
+            <button onclick="scrollToSection('flow-section')" class="whitespace-nowrap px-3 py-1.5 rounded-lg bg-slate-800 text-slate-200 font-medium active:bg-indigo-600 transition shrink-0">1. Распределение 10%</button>
+            <button onclick="scrollToSection('branches-section')" class="whitespace-nowrap px-3 py-1.5 rounded-lg bg-slate-800 text-slate-200 font-medium active:bg-indigo-600 transition shrink-0">2. Ветки сети</button>
+            <button onclick="scrollToSection('calculator-section')" class="whitespace-nowrap px-3 py-1.5 rounded-lg bg-slate-800 text-slate-200 font-medium active:bg-indigo-600 transition shrink-0">3. Калькулятор</button>
+            <button onclick="scrollToSection('platform-economics')" class="whitespace-nowrap px-3 py-1.5 rounded-lg bg-amber-500/10 text-amber-300 font-medium border border-amber-500/20 active:bg-amber-600 transition shrink-0">4. Экономика</button>
+            <button onclick="scrollToSection('rules-section')" class="whitespace-nowrap px-3 py-1.5 rounded-lg bg-slate-800 text-slate-200 font-medium active:bg-indigo-600 transition shrink-0">5. Регламент</button>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-10 space-y-8 sm:space-y-12 flex-1 w-full">
+
+        <!-- Intro Hero Section -->
+        <section class="glass-panel p-5 sm:p-8 rounded-2xl sm:rounded-3xl relative overflow-hidden">
+            <div class="absolute -right-20 -bottom-20 w-72 sm:w-96 h-72 sm:h-96 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="max-w-3xl space-y-3 sm:space-y-4">
+                <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-medium">
+                    <i data-lucide="check-circle2" class="w-3.5 h-3.5 shrink-0"></i>
+                    Прозрачная модель выплат из комиссии подрядчика
+                </div>
+                <h2 class="text-xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight leading-snug">
+                    Как распределяются деньги от ремонта и работает партнёрская сеть
+                </h2>
+                <p class="text-xs sm:text-base text-slate-300 leading-relaxed">
+                    Подрядчик выплачивает <strong class="text-amber-400 font-semibold">10% от чека</strong> за выполненный ремонт. Из этого пула финансируются выплаты продавцам и партнёрской структуре. Каждая реферальная цепь ограничена <strong class="text-indigo-400 font-semibold">2 уровнями</strong>, обеспечивая высокую доходность и полную надежность.
+                </p>
+            </div>
+        </section>
+
+        <!-- SECTION 1: Commission Breakdown Visual Scheme -->
+        <section id="flow-section" class="space-y-4 sm:space-y-6 scroll-mt-24">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div>
+                    <h3 class="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
+                        <span class="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-xs sm:text-sm font-bold border border-indigo-500/30 shrink-0">1</span>
+                        Распределение 10% комиссии со сделки
+                    </h3>
+                    <p class="text-xs text-slate-400 mt-1">Пример на основе стандартного ремонта стоимостью 400 000 ₽</p>
+                </div>
+
+                <!-- Toggle for Volume Bonus -->
+                <div class="inline-flex items-center justify-between sm:justify-start gap-2 bg-slate-900 border border-slate-800 rounded-xl p-1.5 text-xs self-start sm:self-auto w-full sm:w-auto">
+                    <span class="text-slate-400 font-medium pl-1 text-[11px] sm:text-xs">Объём сети:</span>
+                    <div class="flex items-center gap-1">
+                        <button id="btn-volume-normal" onclick="setVolumeMode(false)" class="px-2.5 py-1 text-[11px] sm:text-xs font-semibold rounded-lg bg-indigo-600 text-white transition">
+                            &lt; 15 сделок
+                        </button>
+                        <button id="btn-volume-high" onclick="setVolumeMode(true)" class="px-2.5 py-1 text-[11px] sm:text-xs font-semibold rounded-lg text-slate-400 hover:text-white transition">
+                            ≥ 15 сделок <span class="bg-amber-500/20 text-amber-300 text-[10px] px-1 rounded ml-0.5">+0.5%</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Visual Flow Diagram Card -->
+            <div class="glass-panel p-4 sm:p-8 rounded-2xl sm:rounded-3xl space-y-6 sm:space-y-8">
+                
+                <!-- Stage 1: Order -> Contractor Payment -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 items-center">
+                    
+                    <!-- Box A: Repair Order -->
+                    <div class="bg-slate-900/90 border border-slate-800 rounded-xl sm:rounded-2xl p-4 sm:p-5 text-center relative">
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 mx-auto rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center mb-2 sm:mb-3">
+                            <i data-lucide="home" class="w-5 h-5 sm:w-6 sm:h-6"></i>
+                        </div>
+                        <div class="text-[10px] sm:text-xs text-slate-400 uppercase tracking-wider font-medium">Сделка по ремонту</div>
+                        <div class="text-lg sm:text-xl font-bold text-white mt-0.5" id="flow-repair-sum">400 000 ₽</div>
+                        <div class="text-[10px] text-slate-500 mt-1">Оплата ремонта клиентом</div>
+                    </div>
+
+                    <!-- Arrow 1 -->
+                    <div class="flex flex-col items-center justify-center text-slate-500 py-1 md:py-0">
+                        <div class="flex items-center gap-1.5 text-xs font-medium text-amber-400 bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20">
+                            <span>Комиссия: 10%</span>
+                            <i data-lucide="arrow-right" class="w-3.5 h-3.5 hidden md:inline"></i>
+                            <i data-lucide="arrow-down" class="w-3.5 h-3.5 md:hidden"></i>
+                        </div>
+                        <span class="text-xs sm:text-sm font-extrabold text-amber-400 mt-1" id="flow-total-commission">40 000 ₽</span>
+                    </div>
+
+                    <!-- Box B: GlobalGrand Hub -->
+                    <div class="bg-slate-900/90 border border-amber-500/30 rounded-xl sm:rounded-2xl p-4 sm:p-5 text-center relative shadow-lg shadow-amber-500/5">
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 mx-auto rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center mb-2 sm:mb-3">
+                            <i data-lucide="layers" class="w-5 h-5 sm:w-6 sm:h-6"></i>
+                        </div>
+                        <div class="text-[10px] sm:text-xs text-amber-400/80 uppercase tracking-wider font-medium">ГлобалГранд Hub</div>
+                        <div class="text-lg sm:text-xl font-bold text-white mt-0.5">Пул комиссии</div>
+                        <div class="text-[10px] sm:text-xs text-slate-400 mt-1">100% полученных средств (40 000 ₽)</div>
+                    </div>
+                </div>
+
+                <!-- Connector Bar -->
+                <div class="relative py-1 hidden md:block">
+                    <div class="absolute inset-0 flex items-center">
+                        <div class="w-full border-t border-dashed border-slate-700"></div>
+                    </div>
+                    <div class="relative flex justify-center text-xs uppercase">
+                        <span class="bg-slate-900 px-4 text-slate-400 font-semibold tracking-wider">Распределение пула 10% между участниками</span>
+                    </div>
+                </div>
+
+                <!-- Stage 2: Three Output Recipients -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+                    
+                    <!-- Recipient 1: Direct Partner -->
+                    <div class="bg-slate-900/80 border border-emerald-500/30 rounded-xl sm:rounded-2xl p-4 sm:p-5 relative">
+                        <div class="flex items-center justify-between mb-2 sm:mb-3">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">Фиксировано 5%</span>
+                            <i data-lucide="user-check" class="w-4 h-4 sm:w-5 sm:h-5 text-emerald-400"></i>
+                        </div>
+                        <h4 class="text-sm sm:text-base font-bold text-white">Прямой Партнёр</h4>
+                        <p class="text-[11px] sm:text-xs text-slate-400 mt-0.5">Риэлтор / Сервис приёмки (привёл клиента)</p>
+                        
+                        <div class="mt-3 pt-3 border-t border-slate-800 flex justify-between items-baseline">
+                            <span class="text-xs text-slate-400">Выплата:</span>
+                            <span class="text-lg sm:text-xl font-extrabold text-emerald-400" id="flow-partner-payout">20 000 ₽</span>
+                        </div>
+                    </div>
+
+                    <!-- Recipient 2: Partner Manager / Inviter -->
+                    <div class="bg-slate-900/80 border border-purple-500/30 rounded-xl sm:rounded-2xl p-4 sm:p-5 relative">
+                        <div class="flex items-center justify-between mb-2 sm:mb-3">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded border border-purple-500/20" id="flow-manager-rate-badge">2.5% (База)</span>
+                            <i data-lucide="users" class="w-4 h-4 sm:w-5 sm:h-5 text-purple-400"></i>
+                        </div>
+                        <h4 class="text-sm sm:text-base font-bold text-white">Партнёрский Менеджер</h4>
+                        <p class="text-[11px] sm:text-xs text-slate-400 mt-0.5">Топ-партнёр (подключил этого риэлтора)</p>
+                        
+                        <div class="mt-3 pt-3 border-t border-slate-800 flex justify-between items-baseline">
+                            <span class="text-xs text-slate-400">Выплата:</span>
+                            <span class="text-lg sm:text-xl font-extrabold text-purple-400" id="flow-manager-payout">10 000 ₽</span>
+                        </div>
+                    </div>
+
+                    <!-- Recipient 3: Platform Margin -->
+                    <div class="bg-slate-900/80 border border-slate-700/50 rounded-xl sm:rounded-2xl p-4 sm:p-5 relative">
+                        <div class="flex items-center justify-between mb-2 sm:mb-3">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20" id="flow-platform-rate-badge">2.5% Доход</span>
+                            <i data-lucide="shield-check" class="w-4 h-4 sm:w-5 sm:h-5 text-amber-400"></i>
+                        </div>
+                        <h4 class="text-sm sm:text-base font-bold text-white">Платформа ГлобалГранд</h4>
+                        <p class="text-[11px] sm:text-xs text-slate-400 mt-0.5">Сервис, подбор подрядчика, гарантия</p>
+                        
+                        <div class="mt-3 pt-3 border-t border-slate-800 flex justify-between items-baseline">
+                            <span class="text-xs text-slate-400">Остаток:</span>
+                            <span class="text-lg sm:text-xl font-extrabold text-amber-400" id="flow-platform-payout">10 000 ₽</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Total Visual Bar -->
+                <div class="space-y-2 pt-2">
+                    <div class="flex justify-between text-[11px] sm:text-xs text-slate-400 font-medium">
+                        <span>Баланс 10% комиссии (40 000 ₽)</span>
+                        <span class="text-emerald-400 font-bold">100% распределено</span>
+                    </div>
+                    <div class="h-3 sm:h-4 w-full bg-slate-900 rounded-full overflow-hidden flex p-0.5 border border-slate-800">
+                        <div id="bar-partner" class="bg-emerald-500 h-full rounded-l-full transition-all duration-500" style="width: 50%"></div>
+                        <div id="bar-manager" class="bg-purple-500 h-full transition-all duration-500" style="width: 25%"></div>
+                        <div id="bar-platform" class="bg-amber-500 h-full rounded-r-full transition-all duration-500" style="width: 25%"></div>
+                    </div>
+                    <div class="flex flex-col sm:flex-row justify-between text-[10px] sm:text-xs text-slate-400 pt-1 gap-1 sm:gap-0">
+                        <div class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-500 shrink-0"></span> Партнёр: <strong class="text-slate-200">5% (20k ₽)</strong></div>
+                        <div class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-purple-500 shrink-0"></span> Менеджер: <strong class="text-slate-200" id="bar-text-manager">2.5% (10k ₽)</strong></div>
+                        <div class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-amber-500 shrink-0"></span> ГлобалГранд: <strong class="text-slate-200" id="bar-text-platform">2.5% (10k ₽)</strong></div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 2: 2-Level Cap & Parallel Branch Architecture -->
+        <section id="branches-section" class="space-y-4 sm:space-y-6 scroll-mt-24">
+            <div>
+                <h3 class="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
+                    <span class="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-xs sm:text-sm font-bold border border-indigo-500/30 shrink-0">2</span>
+                    Архитектура двух уровней и параллельных веток
+                </h3>
+                <p class="text-xs text-slate-400 mt-1">«Партнёрский менеджер» — динамическая роль. Каждый партнёр может строить свою подсеть.</p>
+            </div>
+
+            <!-- Detailed Dual-Branch Case Study -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-8">
+                
+                <!-- Branch 1: Ivan -> Olga -->
+                <div class="glass-panel p-4 sm:p-6 rounded-2xl sm:rounded-3xl space-y-4 border-indigo-500/30 relative">
+                    <div class="flex items-center justify-between border-b border-slate-800 pb-3 gap-2">
+                        <span class="px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300 text-[10px] sm:text-xs font-bold border border-indigo-500/30 shrink-0">ВЕТКА №1</span>
+                        <h4 class="font-bold text-white text-xs sm:text-sm truncate">Иван подключает Ольгу</h4>
+                        <span class="text-[10px] sm:text-xs text-slate-400 shrink-0">Чек: <strong class="text-white">400k ₽</strong></span>
+                    </div>
+
+                    <!-- Flow Nodes for Branch 1 -->
+                    <div class="space-y-3">
+                        <!-- Level 2 Node (Ivan) -->
+                        <div class="bg-slate-900/90 border border-purple-500/40 p-3 sm:p-4 rounded-xl sm:rounded-2xl flex items-center justify-between gap-2">
+                            <div class="flex items-center gap-2.5 min-w-0">
+                                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold text-xs sm:text-sm shrink-0">ИВ</div>
+                                <div class="min-w-0">
+                                    <div class="text-xs sm:text-sm font-bold text-white truncate">Иван</div>
+                                    <div class="text-[10px] text-purple-300">Менеджер 2-го уровня</div>
+                                </div>
+                            </div>
+                            <div class="text-right shrink-0">
+                                <div class="text-xs sm:text-sm font-bold text-purple-400">+2.5% (10k ₽)</div>
+                            </div>
+                        </div>
+
+                        <!-- Connector Arrow -->
+                        <div class="flex justify-center text-slate-600">
+                            <i data-lucide="arrow-down" class="w-4 h-4 text-indigo-400 animate-pulse"></i>
+                        </div>
+
+                        <!-- Level 1 Node (Olga) -->
+                        <div class="bg-slate-900/90 border border-emerald-500/40 p-3 sm:p-4 rounded-xl sm:rounded-2xl flex items-center justify-between gap-2">
+                            <div class="flex items-center gap-2.5 min-w-0">
+                                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs sm:text-sm shrink-0">ОЛ</div>
+                                <div class="min-w-0">
+                                    <div class="text-xs sm:text-sm font-bold text-white truncate">Ольга (Риэлтор)</div>
+                                    <div class="text-[10px] text-emerald-300">Прямой Продавец</div>
+                                </div>
+                            </div>
+                            <div class="text-right shrink-0">
+                                <div class="text-xs sm:text-sm font-bold text-emerald-400">+5.0% (20k ₽)</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-indigo-950/40 border border-indigo-500/20 rounded-xl p-2.5 text-[11px] sm:text-xs text-indigo-200">
+                        Ольга получает свои 5%. Иван получает 2.5% сверху из доли ГлобалГранд.
+                    </div>
+                </div>
+
+                <!-- Branch 2: Olga -> Petr -->
+                <div class="glass-panel p-4 sm:p-6 rounded-2xl sm:rounded-3xl space-y-4 border-purple-500/30 relative">
+                    <div class="flex items-center justify-between border-b border-slate-800 pb-3 gap-2">
+                        <span class="px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 text-[10px] sm:text-xs font-bold border border-purple-500/30 shrink-0">ВЕТКА №2</span>
+                        <h4 class="font-bold text-white text-xs sm:text-sm truncate">Ольга подключает Петра</h4>
+                        <span class="text-[10px] sm:text-xs text-slate-400 shrink-0">Чек: <strong class="text-white">400k ₽</strong></span>
+                    </div>
+
+                    <!-- Flow Nodes for Branch 2 -->
+                    <div class="space-y-3">
+                        <!-- Level 2 Node (Olga as Manager) -->
+                        <div class="bg-slate-900/90 border border-purple-500/40 p-3 sm:p-4 rounded-xl sm:rounded-2xl flex items-center justify-between gap-2">
+                            <div class="flex items-center gap-2.5 min-w-0">
+                                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold text-xs sm:text-sm shrink-0">ОЛ</div>
+                                <div class="min-w-0">
+                                    <div class="text-xs sm:text-sm font-bold text-white truncate">Ольга</div>
+                                    <div class="text-[10px] text-purple-300">Менеджер для Петра</div>
+                                </div>
+                            </div>
+                            <div class="text-right shrink-0">
+                                <div class="text-xs sm:text-sm font-bold text-purple-400">+2.5% (10k ₽)</div>
+                            </div>
+                        </div>
+
+                        <!-- Connector Arrow -->
+                        <div class="flex justify-center text-slate-600">
+                            <i data-lucide="arrow-down" class="w-4 h-4 text-purple-400 animate-pulse"></i>
+                        </div>
+
+                        <!-- Level 1 Node (Petr) -->
+                        <div class="bg-slate-900/90 border border-emerald-500/40 p-3 sm:p-4 rounded-xl sm:rounded-2xl flex items-center justify-between gap-2">
+                            <div class="flex items-center gap-2.5 min-w-0">
+                                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs sm:text-sm shrink-0">ПТ</div>
+                                <div class="min-w-0">
+                                    <div class="text-xs sm:text-sm font-bold text-white truncate">Пётр (Новый Риэлтор)</div>
+                                    <div class="text-[10px] text-emerald-300">Прямой Продавец</div>
+                                </div>
+                            </div>
+                            <div class="text-right shrink-0">
+                                <div class="text-xs sm:text-sm font-bold text-emerald-400">+5.0% (20k ₽)</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Critical Rule Callout: Ivan gets 0% here -->
+                    <div class="bg-rose-950/30 border border-rose-500/30 rounded-xl p-3 flex items-start gap-2.5">
+                        <i data-lucide="alert-triangle" class="w-4 h-4 text-rose-400 shrink-0 mt-0.5"></i>
+                        <div class="text-[11px] sm:text-xs text-rose-200">
+                            <strong class="text-white block font-semibold mb-0.5">Что получает Иван со сделки Петра?</strong>
+                            Иван получает <strong class="text-rose-400">0 ₽</strong>, так как Пётр на 3-м уровне от него! Глубина выплат строго ограничена 2 уровнями.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 3: Interactive Partner Income Simulator / Calculator -->
+        <section id="calculator-section" class="space-y-4 sm:space-y-6 scroll-mt-24">
+            <div>
+                <h3 class="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
+                    <span class="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-xs sm:text-sm font-bold border border-indigo-500/30 shrink-0">3</span>
+                    Симулятор дохода Партнёра / Менеджера
+                </h3>
+                <p class="text-xs text-slate-400 mt-1">Рассчитайте потенциальный доход от личных продаж и подсети</p>
+            </div>
+
+            <div class="glass-panel p-4 sm:p-8 rounded-2xl sm:rounded-3xl border-indigo-500/30">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
+                    <!-- Controls -->
+                    <div class="space-y-4 sm:space-y-6">
+                        <div class="space-y-1.5">
+                            <div class="flex justify-between items-center text-xs">
+                                <label for="input-avg-check" class="font-medium text-slate-300">Средний чек ремонта:</label>
+                                <span class="text-xs sm:text-sm font-bold text-white" id="val-avg-check">400 000 ₽</span>
+                            </div>
+                            <input type="range" id="input-avg-check" min="100000" max="2000000" step="50000" value="400000" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-indigo-500" oninput="calculateEarnings()">
+                        </div>
+
+                        <div class="space-y-1.5">
+                            <div class="flex justify-between items-center text-xs">
+                                <label for="input-personal-deals" class="font-medium text-slate-300">Личные сделки за месяц (5%):</label>
+                                <span class="text-xs sm:text-sm font-bold text-emerald-400" id="val-personal-deals">2 сделки</span>
+                            </div>
+                            <input type="range" id="input-personal-deals" min="0" max="20" step="1" value="2" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-500" oninput="calculateEarnings()">
+                        </div>
+
+                        <div class="space-y-1.5">
+                            <div class="flex justify-between items-center text-xs">
+                                <label for="input-sub-partners" class="font-medium text-slate-300">Привлечено суб-партнёров:</label>
+                                <span class="text-xs sm:text-sm font-bold text-purple-400" id="val-sub-partners">5 партнёров</span>
+                            </div>
+                            <input type="range" id="input-sub-partners" min="0" max="30" step="1" value="5" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-purple-500" oninput="calculateEarnings()">
+                        </div>
+
+                        <div class="space-y-1.5">
+                            <div class="flex justify-between items-center text-xs">
+                                <label for="input-sub-deals" class="font-medium text-slate-300">Сделок у 1 суб-партнёра/мес:</label>
+                                <span class="text-xs sm:text-sm font-bold text-purple-300" id="val-sub-deals">3 сделки/партнёр</span>
+                            </div>
+                            <input type="range" id="input-sub-deals" min="0" max="10" step="1" value="3" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-purple-400" oninput="calculateEarnings()">
+                        </div>
+                    </div>
+
+                    <!-- Output Summary -->
+                    <div class="bg-slate-900 border border-slate-800 rounded-xl sm:rounded-2xl p-4 sm:p-6 flex flex-col justify-between">
+                        <div class="space-y-3 sm:space-y-4">
+                            <!-- Volume Status Banner -->
+                            <div id="calc-volume-banner" class="bg-slate-950 p-3 rounded-xl border border-slate-800 flex items-center justify-between gap-2">
+                                <div class="flex items-center gap-2 text-[11px] sm:text-xs text-slate-300 min-w-0">
+                                    <i data-lucide="award" class="w-4 h-4 text-amber-400 shrink-0"></i>
+                                    <span id="calc-bonus-status-desc" class="truncate">До надбавки 3.0% не хватает сделок.</span>
+                                </div>
+                                <span id="calc-rate-badge" class="px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 font-bold border border-slate-700 text-[10px] sm:text-[11px] shrink-0">Ставка 2.5%</span>
+                            </div>
+
+                            <div class="space-y-2.5 pt-1">
+                                <div class="flex justify-between items-center text-xs">
+                                    <span class="text-slate-400 flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> Личный доход (5%):</span>
+                                    <span class="font-bold text-emerald-400" id="res-personal">40 000 ₽</span>
+                                </div>
+                                <div class="flex justify-between items-center text-xs">
+                                    <span class="text-slate-400 flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-purple-500"></span> Доход подсети (<span id="res-rate-text">2.5%</span>):</span>
+                                    <span class="font-bold text-purple-400" id="res-network">150 000 ₽</span>
+                                </div>
+                                <div class="flex justify-between items-center text-xs border-t border-slate-800 pt-2.5">
+                                    <span class="text-slate-500">Оборот подсети (<span id="calc-total-network-deals">15</span> сделок):</span>
+                                    <span class="font-bold text-slate-300" id="res-turnover">6 000 000 ₽</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-5 pt-3 border-t border-indigo-500/30">
+                            <div class="text-[10px] text-indigo-400 uppercase tracking-wider font-bold mb-0.5">Итоговый доход партнёра за месяц</div>
+                            <div class="text-2xl sm:text-3xl font-black text-white" id="res-total">190 000 ₽</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: Platform Economics & Margin Analysis -->
+        <section id="platform-economics" class="space-y-4 sm:space-y-6 scroll-mt-24">
+            <div>
+                <h3 class="text-lg sm:text-xl font-bold text-amber-400 flex items-center gap-2">
+                    <span class="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center text-xs sm:text-sm font-bold border border-amber-500/30 shrink-0">
+                        <i data-lucide="pie-chart" class="w-3.5 h-3.5 sm:w-4 sm:h-4"></i>
+                    </span>
+                    Откуда деньги и Экономика платформы ГлобалГранд
+                </h3>
+                <p class="text-xs text-slate-400 mt-1">Ответ на вопрос: "С чего оплачивается Менеджер, если комиссия всего 10%?"</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
+                <!-- Explanation Card -->
+                <div class="lg:col-span-1 glass-panel p-4 sm:p-6 rounded-2xl sm:rounded-3xl border-amber-500/30 flex flex-col justify-center space-y-3">
+                    <h4 class="text-base sm:text-lg font-bold text-white">Математика 10% пула</h4>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                        Подрядчик всегда платит <strong class="text-amber-400">10%</strong>. Это 100% входящих денег.<br>
+                        Продавец (Риэлтор) <strong>всегда</strong> забирает свои <strong class="text-emerald-400">5%</strong>.<br>
+                        Оставшиеся <strong class="text-blue-400">5%</strong> — базовая маржа платформы.
+                    </p>
+                    <div class="bg-slate-900/80 border border-slate-700 p-3 rounded-xl text-xs text-slate-400">
+                        <span class="text-amber-400 font-bold block mb-1">Когда есть Менеджер:</span>
+                        ГлобалГранд выделяет <strong>2.5% (или 3%)</strong> из <strong>СВОЕЙ</strong> половины и отдаёт Менеджеру за привлечение активного продавца. У сервиса остаётся чистая маржа <strong>2.5% (или 2%)</strong>.
+                    </div>
+                </div>
+
+                <!-- Visual Breakdown -->
+                <div class="lg:col-span-2 glass-panel p-4 sm:p-6 rounded-2xl sm:rounded-3xl border-slate-700 flex flex-col justify-between">
+                    <h4 class="text-xs font-bold text-slate-300 uppercase tracking-wider text-center mb-4">Два сценария распределения (на примере 400 000 ₽)</h4>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-1">
+                        <!-- Scenario 1: No Manager -->
+                        <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 relative">
+                            <h5 class="text-white text-xs sm:text-sm font-bold mb-3 flex items-center gap-2">
+                                <i data-lucide="user" class="w-4 h-4 text-slate-500"></i>
+                                Прямая сделка (Без менеджера)
+                            </h5>
+                            
+                            <div class="space-y-2 text-xs">
+                                <div class="flex justify-between items-center text-slate-400"><span>Комиссия 10%:</span> <strong class="text-white">40 000 ₽</strong></div>
+                                <div class="w-full h-px bg-slate-800"></div>
+                                <div class="flex justify-between items-center"><span class="text-slate-300">Риэлтор (5%)</span> <span class="font-bold text-emerald-400">20 000 ₽</span></div>
+                                <div class="flex justify-between items-center"><span class="text-slate-300 font-bold">ГлобалГранд (5%)</span> <span class="font-bold text-amber-400">20 000 ₽</span></div>
+                            </div>
+                        </div>
+
+                        <!-- Scenario 2: With Manager -->
+                        <div class="bg-slate-900 border border-indigo-500/30 rounded-xl p-4 relative">
+                            <h5 class="text-white text-xs sm:text-sm font-bold mb-3 flex items-center gap-2">
+                                <i data-lucide="users" class="w-4 h-4 text-indigo-400"></i>
+                                Сетевая сделка (Есть менеджер)
+                            </h5>
+                            
+                            <div class="space-y-2 text-xs">
+                                <div class="flex justify-between items-center text-slate-400"><span>Комиссия 10%:</span> <strong class="text-white">40 000 ₽</strong></div>
+                                <div class="w-full h-px bg-slate-800"></div>
+                                <div class="flex justify-between items-center"><span class="text-slate-300">Риэлтор (5%)</span> <span class="font-bold text-emerald-400">20 000 ₽</span></div>
+                                <div class="flex justify-between items-center"><span class="text-slate-300">Менеджер (2.5%)</span> <span class="font-bold text-purple-400">10 000 ₽</span></div>
+                                <div class="flex justify-between items-center"><span class="text-slate-300">ГлобалГранд (2.5%)</span> <span class="font-bold text-amber-500">10 000 ₽</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Platform Profit Simulator -->
+            <div class="glass-panel p-4 sm:p-8 rounded-2xl sm:rounded-3xl border-amber-500/20">
+                <div class="flex items-center gap-2.5 mb-4 sm:mb-6">
+                    <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-amber-600 to-orange-500 flex items-center justify-center shadow-lg shadow-amber-500/30 shrink-0">
+                        <i data-lucide="calculator" class="w-5 h-5 text-white"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-base sm:text-lg font-bold text-white">Калькулятор Доходности Платформы</h4>
+                        <p class="text-[11px] sm:text-xs text-slate-400">Расчёт выручки сервиса при разной структуре продаж</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
+                    <!-- Controls -->
+                    <div class="space-y-4">
+                        <div class="space-y-1">
+                            <div class="flex justify-between items-center text-xs">
+                                <label for="plat-avg-check" class="font-medium text-slate-300">Средний чек:</label>
+                                <span class="text-xs sm:text-sm font-bold text-white" id="val-plat-check">400 000 ₽</span>
+                            </div>
+                            <input type="range" id="plat-avg-check" min="100000" max="3000000" step="50000" value="400000" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-amber-500" oninput="calcPlatform()">
+                        </div>
+
+                        <div class="space-y-1">
+                            <div class="flex justify-between items-center text-xs">
+                                <label for="plat-direct-deals" class="font-medium text-slate-300">Прямые сделки (без менеджеров):</label>
+                                <span class="text-xs sm:text-sm font-bold text-blue-400" id="val-plat-direct">20 шт</span>
+                            </div>
+                            <input type="range" id="plat-direct-deals" min="0" max="500" step="10" value="20" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-blue-500" oninput="calcPlatform()">
+                        </div>
+
+                        <div class="space-y-1">
+                            <div class="flex justify-between items-center text-xs">
+                                <label for="plat-network-deals" class="font-medium text-slate-300">Сетевые сделки (под менеджерами):</label>
+                                <span class="text-xs sm:text-sm font-bold text-purple-400" id="val-plat-network">50 шт</span>
+                            </div>
+                            <input type="range" id="plat-network-deals" min="0" max="1000" step="10" value="50" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-purple-500" oninput="calcPlatform()">
+                        </div>
+                    </div>
+
+                    <!-- Output -->
+                    <div class="bg-slate-900 border border-slate-800 rounded-xl sm:rounded-2xl p-4 sm:p-6 flex flex-col justify-between">
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center border-b border-slate-800 pb-2 text-xs">
+                                <span class="text-slate-400">Общий оборот ремонтов:</span>
+                                <span class="font-bold text-white" id="res-plat-turnover">28 000 000 ₽</span>
+                            </div>
+                            
+                            <div class="flex justify-between items-center text-xs">
+                                <span class="text-slate-300">Доход с прямых сделок (5%):</span>
+                                <span class="font-bold text-blue-400" id="res-plat-direct-income">400 000 ₽</span>
+                            </div>
+
+                            <div class="flex justify-between items-center text-xs">
+                                <span class="text-slate-300">Доход с сетевых (<span id="res-plat-network-rate">2.5%</span>):</span>
+                                <span class="font-bold text-purple-400" id="res-plat-network-income">500 000 ₽</span>
+                            </div>
+                            
+                            <div id="plat-bonus-cost" class="hidden p-2 bg-amber-500/10 border border-amber-500/20 rounded text-[10px] text-amber-200">
+                                Сетевые продажи ≥15 шт. Маржа платформы составляет 2% (менеджеры получают 3%).
+                            </div>
+                        </div>
+
+                        <div class="mt-4 pt-3 border-t border-amber-500/30">
+                            <div class="text-[10px] text-amber-500/80 uppercase tracking-wider font-bold mb-0.5">Чистая выручка ГлобалГранд</div>
+                            <div class="text-2xl sm:text-3xl font-black text-amber-400" id="res-plat-total">900 000 ₽</div>
+                            <div class="text-[11px] text-slate-500 mt-1">Эффективная маржа: <strong class="text-slate-300" id="res-plat-effective-margin">3.21%</strong></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: Terms & Conditions Summary Table -->
+        <section id="rules-section" class="space-y-4 sm:space-y-6 scroll-mt-24">
+            <div>
+                <h3 class="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
+                    <span class="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-xs sm:text-sm font-bold border border-indigo-500/30 shrink-0">5</span>
+                    Ключевые условия партнёрского соглашения
+                </h3>
+                <p class="text-xs text-slate-400 mt-1">Выдержка из официального регламента ГлобалГранд</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+                
+                <div class="glass-panel p-4 rounded-xl sm:rounded-2xl space-y-2">
+                    <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center">
+                        <i data-lucide="percent" class="w-4 h-4"></i>
+                    </div>
+                    <h4 class="text-xs sm:text-sm font-bold text-white">5% Личная Ставка</h4>
+                    <p class="text-[11px] text-slate-400 leading-relaxed">
+                        Выплачивается с фактически поступивших денег от подрядчика за клиента.
+                    </p>
+                </div>
+
+                <div class="glass-panel p-4 rounded-xl sm:rounded-2xl space-y-2">
+                    <div class="w-8 h-8 rounded-lg bg-purple-500/10 text-purple-400 flex items-center justify-center">
+                        <i data-lucide="clock" class="w-4 h-4"></i>
+                    </div>
+                    <h4 class="text-xs sm:text-sm font-bold text-white">12 Месяцев Надбавки</h4>
+                    <p class="text-[11px] text-slate-400 leading-relaxed">
+                        Срок надбавки 2.5% за партнёра отсчитывается с его <strong>первой сделки</strong>.
+                    </p>
+                </div>
+
+                <div class="glass-panel p-4 rounded-xl sm:rounded-2xl space-y-2">
+                    <div class="w-8 h-8 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center">
+                        <i data-lucide="award" class="w-4 h-4"></i>
+                    </div>
+                    <h4 class="text-xs sm:text-sm font-bold text-white">Бонус 3% за 15+ Сделок</h4>
+                    <p class="text-[11px] text-slate-400 leading-relaxed">
+                        При достижении 15 сделок в месяц ставка 3.0% ко всей подсети.
+                    </p>
+                </div>
+
+                <div class="glass-panel p-4 rounded-xl sm:rounded-2xl space-y-2">
+                    <div class="w-8 h-8 rounded-lg bg-indigo-500/10 text-indigo-400 flex items-center justify-center">
+                        <i data-lucide="calendar" class="w-4 h-4"></i>
+                    </div>
+                    <h4 class="text-xs sm:text-sm font-bold text-white">Еженедельные Выплаты</h4>
+                    <p class="text-[11px] text-slate-400 leading-relaxed">
+                        Свод накопленного остатка проводить раз в неделю сразу по факту оплаты.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800/80 bg-slate-950 py-6 text-center text-xs text-slate-500 px-4">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+            <div class="flex items-center gap-2">
+                <span class="font-bold text-slate-300">ГлобалГранд</span> — Сервис подбора подрядчиков по ремонту
+            </div>
+            <div>Официальная схема партнёрской программы © 2026</div>
+        </div>
+    </footer>
+
+    <!-- Interactive Logic Script -->
+    <script>
+        let isHighVolume = false;
+
+        function scrollToSection(id) {
+            document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function setVolumeMode(high) {
+            isHighVolume = high;
+            const btnNorm = document.getElementById('btn-volume-normal');
+            const btnHigh = document.getElementById('btn-volume-high');
+
+            if (high) {
+                btnNorm.className = 'px-2.5 py-1 text-[11px] sm:text-xs font-semibold rounded-lg text-slate-400 hover:text-white transition';
+                btnHigh.className = 'px-2.5 py-1 text-[11px] sm:text-xs font-semibold rounded-lg bg-indigo-600 text-white transition shadow-sm';
+            } else {
+                btnNorm.className = 'px-2.5 py-1 text-[11px] sm:text-xs font-semibold rounded-lg bg-indigo-600 text-white transition shadow-sm';
+                btnHigh.className = 'px-2.5 py-1 text-[11px] sm:text-xs font-semibold rounded-lg text-slate-400 hover:text-white transition';
+            }
+
+            updateFlowSection();
+        }
+
+        function updateFlowSection() {
+            const check = 400000;
+            const partnerRate = 0.05;
+            const managerRate = isHighVolume ? 0.03 : 0.025;
+            const platformRate = 0.10 - partnerRate - managerRate;
+
+            const partnerPayout = check * partnerRate;
+            const managerPayout = check * managerRate;
+            const platformPayout = check * platformRate;
+
+            document.getElementById('flow-partner-payout').innerText = partnerPayout.toLocaleString('ru-RU') + ' ₽';
+            document.getElementById('flow-manager-payout').innerText = managerPayout.toLocaleString('ru-RU') + ' ₽';
+            document.getElementById('flow-platform-payout').innerText = platformPayout.toLocaleString('ru-RU') + ' ₽';
+
+            document.getElementById('flow-manager-rate-badge').innerText = isHighVolume ? '3.0% (Бонус)' : '2.5% (База)';
+            document.getElementById('flow-platform-rate-badge').innerText = (platformRate * 100).toFixed(1) + '% Доход';
+
+            document.getElementById('bar-partner').style.width = '50%';
+            document.getElementById('bar-manager').style.width = (managerRate / 0.10 * 100) + '%';
+            document.getElementById('bar-platform').style.width = (platformRate / 0.10 * 100) + '%';
+
+            document.getElementById('bar-text-manager').innerText = (managerRate * 100).toFixed(1) + '% (' + (managerPayout/1000) + 'k ₽)';
+            document.getElementById('bar-text-platform').innerText = (platformRate * 100).toFixed(1) + '% (' + (platformPayout/1000) + 'k ₽)';
+        }
+
+        function calculateEarnings() {
+            const checkEl = document.getElementById('input-avg-check');
+            const personalEl = document.getElementById('input-personal-deals');
+            const subPartnersEl = document.getElementById('input-sub-partners');
+            const subDealsEl = document.getElementById('input-sub-deals');
+
+            if (!checkEl || !personalEl || !subPartnersEl || !subDealsEl) return;
+
+            const avgCheck = parseInt(checkEl.value) || 0;
+            const personalDeals = parseInt(personalEl.value) || 0;
+            const subPartners = parseInt(subPartnersEl.value) || 0;
+            const subDeals = parseInt(subDealsEl.value) || 0;
+
+            if (document.getElementById('val-avg-check')) document.getElementById('val-avg-check').innerText = avgCheck.toLocaleString('ru-RU') + ' ₽';
+            if (document.getElementById('val-personal-deals')) document.getElementById('val-personal-deals').innerText = personalDeals + ' сделок';
+            if (document.getElementById('val-sub-partners')) document.getElementById('val-sub-partners').innerText = subPartners + ' партнёров';
+            if (document.getElementById('val-sub-deals')) document.getElementById('val-sub-deals').innerText = subDeals + ' сделки/партнёр';
+
+            const networkDeals = subPartners * subDeals;
+            if (document.getElementById('calc-total-network-deals')) document.getElementById('calc-total-network-deals').innerText = networkDeals;
+
+            const isBonusRate = networkDeals >= 15;
+            const managerRate = isBonusRate ? 0.03 : 0.025;
+
+            const statusDesc = document.getElementById('calc-bonus-status-desc');
+            const rateBadge = document.getElementById('calc-rate-badge');
+
+            if (statusDesc && rateBadge) {
+                if (isBonusRate) {
+                    statusDesc.innerText = 'План ≥15 сделок выполнен! Ставка 3.0%';
+                    rateBadge.innerText = 'Ставка 3.0%';
+                    rateBadge.className = 'px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 font-bold border border-amber-500/30 text-[10px] sm:text-[11px] shrink-0';
+                } else {
+                    statusDesc.innerText = `До 3.0% не хватает ${15 - networkDeals} сделок`;
+                    rateBadge.innerText = 'Ставка 2.5%';
+                    rateBadge.className = 'px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 font-bold border border-slate-700 text-[10px] sm:text-[11px] shrink-0';
+                }
+            }
+
+            const personalIncome = personalDeals * avgCheck * 0.05;
+            const networkTurnover = networkDeals * avgCheck;
+            const networkIncome = networkTurnover * managerRate;
+            const totalIncome = personalIncome + networkIncome;
+
+            if (document.getElementById('res-personal')) document.getElementById('res-personal').innerText = personalIncome.toLocaleString('ru-RU') + ' ₽';
+            if (document.getElementById('res-network')) document.getElementById('res-network').innerText = networkIncome.toLocaleString('ru-RU') + ' ₽';
+            if (document.getElementById('res-rate-text')) document.getElementById('res-rate-text').innerText = (managerRate * 100).toFixed(1) + '%';
+            if (document.getElementById('res-turnover')) document.getElementById('res-turnover').innerText = networkTurnover.toLocaleString('ru-RU') + ' ₽';
+            if (document.getElementById('res-total')) document.getElementById('res-total').innerText = totalIncome.toLocaleString('ru-RU') + ' ₽';
+        }
+
+        function calcPlatform() {
+            const checkEl = document.getElementById('plat-avg-check');
+            const directEl = document.getElementById('plat-direct-deals');
+            const networkEl = document.getElementById('plat-network-deals');
+
+            if (!checkEl || !directEl || !networkEl) return;
+
+            const check = parseInt(checkEl.value) || 0;
+            const directDeals = parseInt(directEl.value) || 0;
+            const networkDeals = parseInt(networkEl.value) || 0;
+            
+            if (document.getElementById('val-plat-check')) document.getElementById('val-plat-check').innerText = check.toLocaleString('ru-RU') + ' ₽';
+            if (document.getElementById('val-plat-direct')) document.getElementById('val-plat-direct').innerText = directDeals + ' шт';
+            if (document.getElementById('val-plat-network')) document.getElementById('val-plat-network').innerText = networkDeals + ' шт';
+
+            const totalTurnover = (directDeals + networkDeals) * check;
+            if (document.getElementById('res-plat-turnover')) document.getElementById('res-plat-turnover').innerText = totalTurnover.toLocaleString('ru-RU') + ' ₽';
+
+            const directIncome = directDeals * check * 0.05;
+            if (document.getElementById('res-plat-direct-income')) document.getElementById('res-plat-direct-income').innerText = directIncome.toLocaleString('ru-RU') + ' ₽';
+
+            let platformNetworkMarginRate = 0.025; 
+            const bonusCostEl = document.getElementById('plat-bonus-cost');
+            const networkRateEl = document.getElementById('res-plat-network-rate');
+
+            if (networkDeals >= 15) {
+                platformNetworkMarginRate = 0.02;
+                if (networkRateEl) networkRateEl.innerText = '2.0% (Менеджер 3%)';
+                if (bonusCostEl) bonusCostEl.classList.remove('hidden');
+            } else {
+                platformNetworkMarginRate = 0.025;
+                if (networkRateEl) networkRateEl.innerText = '2.5%';
+                if (bonusCostEl) bonusCostEl.classList.add('hidden');
+            }
+
+            const networkIncome = networkDeals * check * platformNetworkMarginRate;
+            if (document.getElementById('res-plat-network-income')) document.getElementById('res-plat-network-income').innerText = networkIncome.toLocaleString('ru-RU') + ' ₽';
+
+            const totalIncome = directIncome + networkIncome;
+            if (document.getElementById('res-plat-total')) document.getElementById('res-plat-total').innerText = totalIncome.toLocaleString('ru-RU') + ' ₽';
+
+            const effectiveMargin = totalTurnover > 0 ? (totalIncome / totalTurnover) * 100 : 0;
+            if (document.getElementById('res-plat-effective-margin')) document.getElementById('res-plat-effective-margin').innerText = effectiveMargin.toFixed(2) + '%';
+        }
+
+        window.onload = function() {
+            if (window.lucide) {
+                lucide.createIcons();
+            }
+            updateFlowSection();
+            calculateEarnings();
+            calcPlatform();
+        };
+    </script>
+</body>
+</html>
